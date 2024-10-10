@@ -1,0 +1,77 @@
+vsphere-csi:
+  global:
+    mode: full
+    logLevel: PRODUCTION
+
+    config:
+      csidriver:
+        enabled: true
+ 
+      storageclass:
+        enabled: true
+        storagepolicyname: ""
+        expansion: true # https://vsphere-csi-driver.sigs.k8s.io/features/volume_expansion.html
+        default: true
+        reclaimPolicy: Delete
+
+      global:
+        port: 443
+        insecure-flag: true
+        secretName: csi-vsphere-config
+        secretNamespace: kube-system
+        cluster-id: k8s-prod/k8s-prod
+      vcenter:
+        <path:k8s/data/vsphere#hostname>:
+          server: <path:k8s/data/vsphere#hostname>
+          user: <path:k8s/data/vsphere#user>
+          password: <path:k8s/data/vsphere#pass>
+          datacenters:
+            - GeekHouse
+          secretName: cpi-engineering-secret
+          secretNamespace: kube-system
+
+  controller:
+    name: vsphere-csi-controller
+    config:
+      csi-migration: true
+      csi-auth-check: true
+      online-volume-extend: true
+      trigger-csi-fullsync: false
+      async-query-volume: true
+      block-volume-snapshot: true
+      csi-windows-support: true
+      use-csinode-id: true
+      list-volumes: true
+      pv-to-backingdiskobjectid-mapping: false
+      cnsmgr-suspend-create-volume: true
+      topology-preferential-datastores: true
+      max-pvscsi-targets-per-vm: true
+      multi-vcenter-csi-topology: true
+      csi-internal-generated-cluster-id: true
+      listview-tasks: false
+
+
+
+
+
+
+  node:
+    name: vsphere-csi-node
+
+  webhook:
+    enabled: false
+
+  metrics:
+    enabled: false
+
+  rbac:
+    create: true
+
+  vsphere-cpi:
+    enabled: false
+
+  snapshot:
+    controller:
+      enabled: false
+    validationWebhook:
+      enabled: false
