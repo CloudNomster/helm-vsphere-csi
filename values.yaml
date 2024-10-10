@@ -20,15 +20,6 @@ vsphere-csi:
         secretName: csi-vsphere-config
         secretNamespace: kube-system
         cluster-id: k8s-prod/k8s-prod
-      vcenter:
-        <path:k8s/data/vsphere#hostname>:
-          server: <path:k8s/data/vsphere#hostname>
-          user: <path:k8s/data/vsphere#user>
-          password: <path:k8s/data/vsphere#pass>
-          datacenters:
-            - GeekHouse
-          secretName: cpi-engineering-secret
-          secretNamespace: kube-system
 
   controller:
     name: vsphere-csi-controller
