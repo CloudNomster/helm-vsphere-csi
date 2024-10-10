@@ -1,7 +1,7 @@
 apiVersion: v2
 name: vsphere-csi
 description: A Helm chart for vsphere-csi
-home: https://github.com/Schabo/helm-vsphere-csi
+home: https://github.com/CloudNomster/helm-vsphere-csi
 type: application
 version: 0.1.0
 deprecated: false
