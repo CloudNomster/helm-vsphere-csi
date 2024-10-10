@@ -32,6 +32,9 @@ vsphere-csi:
 
   controller:
     name: vsphere-csi-controller
+    image:
+      registry: registry.k8s.io
+      repository: csi-vsphere/driver
     config:
       csi-migration: true
       csi-auth-check: true
@@ -49,14 +52,55 @@ vsphere-csi:
       multi-vcenter-csi-topology: true
       csi-internal-generated-cluster-id: true
       listview-tasks: false
+    resizer:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/csi-resizer
+    attacher:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/csi-attacher
+    livenessprobe:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/livenessprobe
+    syncer:
+      image:
+        registry: registry.k8s.io
+        repository: csi-vsphere/syncer
+    provisioner:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/csi-provisioner
+    snapshotter:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/csi-snapshotter
 
-
-
-
+  snapshotwebhook:
+    name: vsphere-csi-snapshotwebhook
+    image:
+      registry: registry.k8s.io
+      repository: sig-storage/snapshot-validation-webhook
 
 
   node:
     name: vsphere-csi-node
+    image:
+      registry: registry.k8s.io
+      repository: csi-vsphere/driver
+    registrar:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/csi-node-driver-registrar
+    livenessprobe:
+      image:
+        registry: registry.k8s.io
+        repository: sig-storage/livenessprobe
+
+
+
+
 
   webhook:
     enabled: false
