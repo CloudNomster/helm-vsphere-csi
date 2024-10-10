@@ -11,3 +11,16 @@ dependencies:
     version: 3.7.0
     repository: https://vsphere-tmm.github.io/helm-charts
 
+    values: |
+      vsphere-csi:
+        global:
+          config:
+            vcenter:
+              <path:k8s/data/vsphere#hostname>:
+                server: <path:k8s/data/vsphere#hostname>
+                user: <path:k8s/data/vsphere#user>
+                password: <path:k8s/data/vsphere#pass>
+                datacenters:
+                  - GeekHouse
+                secretName: cpi-engineering-secret
+                secretNamespace: kube-system
