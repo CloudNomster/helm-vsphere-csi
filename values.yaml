@@ -4,6 +4,7 @@ vsphere-csi:
     logLevel: PRODUCTION
 
     config:
+      existingSecret: vsphere-csi
       csidriver:
         enabled: true
  
